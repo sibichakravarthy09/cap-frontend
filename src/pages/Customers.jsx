@@ -32,9 +32,7 @@ const Customers = () => {
     status: ''
   });
 
-  useEffect(() => {
-    fetchCustomers();
-  }, [pagination.page, searchTerm, filters]);
+  
 
   const fetchCustomers = async () => {
     try {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
-import { Search, Filter, X } from 'lucide-react';
+import { Search, } from 'lucide-react';
 
 const FilterBar = ({ 
   searchTerm, 

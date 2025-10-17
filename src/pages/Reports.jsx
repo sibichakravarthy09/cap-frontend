@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Tabs, Tab } from 'react-bootstrap';
-import { BarChart3 } from 'lucide-react';
+
 import { RevenueChart, SalesChart, PieChartCard, LoadingSpinner } from '../components';
 import reportService from '../services/reportService';
 import { toast } from 'react-toastify';

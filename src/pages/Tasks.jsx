@@ -39,10 +39,7 @@ const Tasks = () => {
     priority: ''
   });
 
-  useEffect(() => {
-    fetchTasks();
-    fetchRelatedData();
-  }, [pagination.page, searchTerm, filters]);
+  
 
   const fetchTasks = async () => {
     try {

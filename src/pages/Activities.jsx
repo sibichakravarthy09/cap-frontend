@@ -13,9 +13,7 @@ const Activities = () => {
     model: ''
   });
 
-  useEffect(() => {
-    fetchActivities();
-  }, [filter]);
+  
 
   const fetchActivities = async () => {
     try {
