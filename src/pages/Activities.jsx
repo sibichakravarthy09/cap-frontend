@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Card, Form, Row, Col } from 'react-bootstrap';
 import { Activity } from 'lucide-react';
 import { ActivityTimeline, LoadingSpinner, EmptyState } from '../components';
@@ -12,10 +12,8 @@ const Activities = () => {
     type: '',
     model: ''
   });
-
   
-
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async () => {
     try {
       setLoading(true);
       const params = {
@@ -31,7 +29,11 @@ const Activities = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    fetchActivities();
+  }, [fetchActivities]);
 
   const handleFilterChange = (name, value) => {
     setFilter({ ...filter, [name]: value });
@@ -43,7 +45,6 @@ const Activities = () => {
         <h2 className="mb-1">Activities</h2>
         <p className="text-muted mb-0">Track all your customer interactions</p>
       </div>
-
       <Row className="g-4">
         <Col lg={3}>
           <Card className="border-0 shadow-sm sticky-top" style={{ top: '100px' }}>
@@ -68,7 +69,6 @@ const Activities = () => {
                   <option value="Status Change">Status Change</option>
                 </Form.Select>
               </Form.Group>
-
               <Form.Group className="mb-3">
                 <Form.Label className="small">Related To</Form.Label>
                 <Form.Select
@@ -85,7 +85,6 @@ const Activities = () => {
             </Card.Body>
           </Card>
         </Col>
-
         <Col lg={9}>
           <Card className="border-0 shadow-sm">
             <Card.Body>

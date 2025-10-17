@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Button, Card } from 'react-bootstrap';
 import { Plus, Users } from 'lucide-react';
 import {
@@ -32,9 +32,7 @@ const Customers = () => {
     status: ''
   });
 
-  
-
-  const fetchCustomers = async () => {
+  const fetchCustomers = useCallback(async () => {
     try {
       setLoading(true);
       const params = {
@@ -52,7 +50,11 @@ const Customers = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.page, pagination.limit, searchTerm, filters.status]);
+
+  useEffect(() => {
+    fetchCustomers();
+  }, [fetchCustomers]);
 
   const handleCreate = () => {
     setSelectedCustomer(null);
