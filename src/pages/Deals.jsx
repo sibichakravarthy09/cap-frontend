@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Button, Card } from 'react-bootstrap';
 import { Plus, DollarSign } from 'lucide-react';
 import {
@@ -34,12 +34,7 @@ const Deals = () => {
     stage: ''
   });
 
-  useEffect(() => {
-    fetchDeals();
-    fetchCustomers();
-  }, [pagination.page, searchTerm, filters]);
-
-  const fetchDeals = async () => {
+  const fetchDeals = useCallback(async () => {
     try {
       setLoading(true);
       const params = {
@@ -57,16 +52,24 @@ const Deals = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.page, pagination.limit, searchTerm, filters.stage]);
 
-  const fetchCustomers = async () => {
+  const fetchCustomers = useCallback(async () => {
     try {
       const response = await customerService.getCustomers({ limit: 100 });
       setCustomers(response.data);
     } catch (error) {
       console.error('Error fetching customers:', error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchDeals();
+  }, [fetchDeals]);
+
+  useEffect(() => {
+    fetchCustomers();
+  }, [fetchCustomers]);
 
   const handleCreate = () => {
     setSelectedDeal(null);
