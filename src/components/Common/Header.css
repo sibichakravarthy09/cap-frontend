@@ -1,0 +1,65 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  margin-left: 260px;
+}
+
+.search-form {
+  max-width: 500px;
+}
+
+.search-form .input-group-text {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.search-form .form-control {
+  border: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.search-form .form-control:focus {
+  background-color: #fff;
+  box-shadow: none;
+  border-color: #0d6efd;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-icon:hover {
+  opacity: 0.7;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.notification-dropdown {
+  min-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    margin-left: 0;
+  }
+  
+  .search-form {
+    max-width: 100%;
+  }
+}
