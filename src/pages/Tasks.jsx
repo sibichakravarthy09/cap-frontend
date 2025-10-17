@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Button, Card } from 'react-bootstrap';
 import { Plus, CheckSquare } from 'lucide-react';
 import {
@@ -39,9 +39,7 @@ const Tasks = () => {
     priority: ''
   });
 
-  
-
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       setLoading(true);
       const params = {
@@ -59,9 +57,9 @@ const Tasks = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.page, pagination.limit, filters.status, filters.priority]);
 
-  const fetchRelatedData = async () => {
+  const fetchRelatedData = useCallback(async () => {
     try {
       const [customersRes, leadsRes, dealsRes] = await Promise.all([
         customerService.getCustomers({ limit: 100 }),
@@ -74,7 +72,15 @@ const Tasks = () => {
     } catch (error) {
       console.error('Error fetching related data:', error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
+
+  useEffect(() => {
+    fetchRelatedData();
+  }, [fetchRelatedData]);
 
   const handleCreate = () => {
     setSelectedTask(null);
