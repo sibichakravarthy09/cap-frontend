@@ -56,11 +56,7 @@ const FilterBar = ({
             onClick={onClearFilters}
             className="d-flex align-items-center"
           >
-<<<<<<< HEAD
             
-=======
-           
->>>>>>> 83a4f1673e23f91513561f60b63348fbb4b0925e
             Clear
           </Button>
         </Col>
